@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 const UserCreate = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +20,7 @@ const UserCreate = () => {
       <div className="bg-gray-200 p-7 rounded-2xl min-w-96 h-fit mx-4">
         <h1 className="text-3xl font-bold text-center">Create User</h1>
         <hr className="mb-4" />
-        <form onSubmit={handleSubmit}>
+        <form>
           <div>
             <label
               htmlFor="name"
