@@ -16,7 +16,15 @@ const Home = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [data]);
+
+  const handleDelete = async (data) => {
+    const id = data._id;
+    console.log(data);
+    await axios
+      .delete(`http://localhost:3000/api/user/delete/${id}`)
+      .then((res) => alert(res.message));
+  };
   return (
     <div className="flex justify-center items-center w-[100vw] h-[100vh] bg-gradient-to-b from-purple-500 to-pink-500">
       <div className="bg-gray-200 p-7 rounded-2xl min-w-96 h-fit mx-4">
@@ -40,9 +48,12 @@ const Home = () => {
                   <td>{data.age}</td>
                   <td>
                     <button className="bg-gray-500 text-white px-2 py-0.5 rounded-md mr-1">
-                      Edit
+                      Edite
                     </button>{" "}
-                    <button className="bg-red-500 text-white px-2 py-0.5 rounded-md">
+                    <button
+                      onClick={() => handleDelete(data)}
+                      className="bg-red-500 text-white px-2 py-0.5 rounded-md"
+                    >
                       Delete
                     </button>
                   </td>
