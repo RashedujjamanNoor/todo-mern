@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const UserCreate = () => {
   const [formData, setFormData] = useState({
@@ -15,12 +16,31 @@ const UserCreate = () => {
     }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/api/user/create",
+        formData
+      );
+
+      alert(res.data.message);
+      setFormData({
+        name: "",
+        email: "",
+        age: "",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex justify-center items-center w-[100vw] h-[100vh] bg-gradient-to-b from-purple-500 to-pink-500">
       <div className="bg-gray-200 p-7 rounded-2xl min-w-96 h-fit mx-4">
         <h1 className="text-3xl font-bold text-center">Create User</h1>
         <hr className="mb-4" />
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label
               htmlFor="name"
@@ -30,6 +50,7 @@ const UserCreate = () => {
             </label>
             <input
               type="text"
+              required
               onChange={handleChange}
               value={formData.name}
               name="name"
@@ -44,7 +65,8 @@ const UserCreate = () => {
               E-mail
             </label>
             <input
-              type="text"
+              type="email"
+              required
               onChange={handleChange}
               value={formData.email}
               name="email"
@@ -59,8 +81,9 @@ const UserCreate = () => {
               Age
             </label>
             <input
-              type="text"
+              type="number"
               onChange={handleChange}
+              required
               value={formData.age}
               name="age"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"

@@ -23,7 +23,7 @@ const Home = () => {
     console.log(data);
     await axios
       .delete(`http://localhost:3000/api/user/delete/${id}`)
-      .then((res) => alert(res.message));
+      .then((res) => alert(res.data.message));
   };
   return (
     <div className="flex justify-center items-center w-[100vw] h-[100vh] bg-gradient-to-b from-purple-500 to-pink-500">
@@ -44,9 +44,9 @@ const Home = () => {
               data.map((data, index) => (
                 <tr key={index}>
                   <td>{data.name}</td>
-                  <td>{data.email}</td>
+                  <td className="px-1">{data.email}</td>
                   <td>{data.age}</td>
-                  <td>
+                  <td className="py-2">
                     <button className="bg-gray-500 text-white px-2 py-0.5 rounded-md mr-1">
                       Edite
                     </button>{" "}
